@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1e471d2cf4742581d8b9bb98d14030f",
+    "content-hash": "1a179647e881d15e8dbb7e89688342bd",
     "packages": [
         {
             "name": "brick/math",
@@ -5954,6 +5954,52 @@
             "time": "2024-12-21T16:25:41+00:00"
         },
         {
+            "name": "timm49/laravel-similar-content",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "../similar-content",
+                "reference": "d07ac589873d918eb20284e938891e146ee6bf7e"
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.9",
+                "illuminate/http": "*",
+                "illuminate/support": "*",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "orchestra/testbench": "^8.0",
+                "pestphp/pest": "^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Timm49\\LaravelSimilarContent\\Providers\\SimilarContentProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Timm49\\LaravelSimilarContent\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Timm49\\LaravelSimilarContent\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "A Laravel package for finding similar content",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.2",
             "source": {
@@ -8469,8 +8515,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "timm49/laravel-similar-content": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -39,6 +39,30 @@
                                 </span>
                             </div>
                         </div>
+
+                        <!-- Similar content -->
+                        <div class="mt-8 pt-6 border-t border-gray-200">
+                            <h3 class="text-sm font-medium text-gray-900 mb-2">Related articles:</h3>
+
+                                <div v-for="similarContent in similar_content" :key="similarContent"
+                                      class="my-2 p-4 text-md text-lg bg-gray-100 text-gray-800 grid grid-cols-4">
+                                    <div class="col-span-3">
+                                        {{ similarContent.title }}
+                                    </div>
+                                    <div class="col-span-1">
+                                        <span class="float-right text-sm inline-flex bg-amber-600 text-white items-center px-2.5 py-0.5 rounded-full">
+                                            {{ similarContent.category }}
+                                        </span>
+                                        <span class="float-right text-sm inline-flex bg-blue-600 text-white items-center px-2.5 py-0.5 rounded-full">
+                                            {{similarContent.similarity_score}}
+                                        </span>
+                                    </div>
+
+
+                                </div>
+<!--                                <pre>{{similar_content}}</pre>-->
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,6 +76,10 @@ import { Link } from '@inertiajs/vue3';
 const props = defineProps({
     article: {
         type: Object,
+        required: true
+    },
+    similar_content: {
+        type: Array,
         required: true
     }
 });
