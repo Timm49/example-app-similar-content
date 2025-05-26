@@ -16,6 +16,7 @@ class GenerateArticleTest extends TestCase
 
     public function test_it_generates_an_article()
     {
+        $articles = Article::factory()->count(3)->create();
         // Mock the OpenAI response
         OpenAI::fake([
             CreateResponse::fake([

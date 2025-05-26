@@ -19,7 +19,7 @@
                                     {{ article.title }}
                                 </h2>
                                 <p class="text-sm text-gray-500">
-                                    By {{ article.author }}
+                                    By {{ article.author }} - {{ article.created_at }}
                                 </p>
                             </Link>
                         </div>
