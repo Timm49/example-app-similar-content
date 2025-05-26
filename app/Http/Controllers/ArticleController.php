@@ -11,7 +11,7 @@ class ArticleController extends Controller
     {
         return Inertia::render('Welcome', [
             'articles' => Article::latest()
-                ->take(30)
+                ->take(40)
                 ->get()
         ]);
     }
