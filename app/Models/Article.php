@@ -13,11 +13,6 @@ class Article extends Model
 {
     use HasFactory, SoftDeletes, HasSimilarContent;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'title',
         'slug',
@@ -31,23 +26,22 @@ class Article extends Model
         'keywords',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'published_at' => 'datetime',
         'keywords' => 'array',
     ];
 
-    /**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getEmbeddingData(): string
+    {
+        $embedData = collect($this->getFillable())
+            ->mapWithKeys(fn ($key) => [$key => $this->getAttribute($key)])
+            ->toArray();
+
+        return json_encode($embedData);
     }
 }

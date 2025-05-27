@@ -21,15 +21,15 @@ class GenerateArticlesFromRssCommand extends Command
 //            'Europe',
 //            'MiddleEast',
             'Education',
-//            'Politics',
+            'Politics',
 //            'Business',
             'Technology',
 //            'Arts',
 //            'ArtandDesign',
 //            'Dance',
-            'Music',
-            'Movies',
-            'Television',
+//            'Music',
+//            'Movies',
+//            'Television',
 //            'Theater',
 //            'SmallBusiness',
 //            'EnergyEnvironment',
@@ -57,20 +57,21 @@ class GenerateArticlesFromRssCommand extends Command
                 $description = (string) $item->description;
                 $author = (string) $item->children('dc', true)->creator;
                 $categories = collect($item->xpath('category'))->map(fn($c) => (string) $c)->values()->toArray();
+                $slug = Str::slug($title);
 
                 if (empty($categories)) {
                     $this->line("Skipped no categories: $title");
                     continue;
                 }
 
-                if (Article::where('title', $title)->exists()) {
+                if (Article::where('slug', $slug)->exists()) {
                     $this->line("Skipped duplicate: $title");
                     continue;
                 }
 
                 Article::create([
                     'title' => $title,
-                    'slug' => Str::slug($title),
+                    'slug' => $slug,
                     'content' => $description,
                     'author' => $author,
                     'category' => $categories[0] ?? null,
