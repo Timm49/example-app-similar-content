@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Timm49\LaravelSimilarContent\Attributes\HasEmbeddings;
-use Timm49\LaravelSimilarContent\Traits\HasSimilarContent;
+use Timm49\SimilarContentLaravel\Attributes\HasEmbeddings;
+use Timm49\SimilarContentLaravel\Traits\HasSimilarContent;
 
 #[HasEmbeddings]
 class Article extends Model

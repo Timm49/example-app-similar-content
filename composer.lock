@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e66c68b173a3951f62d7a599c525378",
+    "content-hash": "1d6f16e8992de9f28decd37cfcfdd0d6",
     "packages": [
         {
             "name": "brick/math",
@@ -5954,12 +5954,18 @@
             "time": "2024-12-21T16:25:41+00:00"
         },
         {
-            "name": "timm49/laravel-similar-content",
-            "version": "dev-main",
+            "name": "timm49/similar-content-laravel",
+            "version": "0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Timm49/similar-content-laravel.git",
+                "reference": "9e5828b937ea4d15556432a00b25885ab4b9ed7f"
+            },
             "dist": {
-                "type": "path",
-                "url": "../similar-content",
-                "reference": "25c24d49f30abc68902cfbb963ce06744acd9a50"
+                "type": "zip",
+                "url": "https://api.github.com/repos/Timm49/similar-content-laravel/zipball/9e5828b937ea4d15556432a00b25885ab4b9ed7f",
+                "reference": "9e5828b937ea4d15556432a00b25885ab4b9ed7f",
+                "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.9",
@@ -5976,28 +5982,25 @@
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Timm49\\LaravelSimilarContent\\Providers\\SimilarContentProvider"
+                        "Timm49\\SimilarContentLaravel\\Providers\\SimilarContentProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Timm49\\LaravelSimilarContent\\": "src/"
+                    "Timm49\\SimilarContentLaravel\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Timm49\\LaravelSimilarContent\\Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "A Laravel package for finding similar content",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/Timm49/similar-content-laravel/issues",
+                "source": "https://github.com/Timm49/similar-content-laravel/tree/0.0.2"
+            },
+            "time": "2025-05-27T15:04:17+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -8516,9 +8519,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "timm49/laravel-similar-content": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

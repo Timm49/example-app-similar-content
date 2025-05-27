@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Inertia\Inertia;
 use Inertia\Response;
-use Timm49\LaravelSimilarContent\SimilarContent;
-use Timm49\LaravelSimilarContent\SimilarContentResult;
+use Timm49\SimilarContentLaravel\SimilarContent;
+use Timm49\SimilarContentLaravel\SimilarContentResult;
 
 class ArticleController extends Controller
 {
