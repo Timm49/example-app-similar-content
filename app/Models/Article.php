@@ -41,22 +41,6 @@ class Article extends Model
     ];
 
     /**
-     * Get the user that owns the article.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the category that owns the article.
-     */
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    /**
      * Get the route key for the model.
      *
      * @return string

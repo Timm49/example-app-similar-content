@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\GenerateArticle;
+use App\Jobs\GenerateArticleWithAI;
 use Illuminate\Console\Command;
 
-class GenerateArticlesCommand extends Command
+class GenerateArticlesWithAICommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -27,7 +27,7 @@ class GenerateArticlesCommand extends Command
     public function handle()
     {
         for ($i = 0; $i < 5; $i++) {
-            GenerateArticle::dispatch();
+            GenerateArticleWithAI::dispatch();
         }
     }
 }
