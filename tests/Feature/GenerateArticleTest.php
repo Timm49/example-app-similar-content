@@ -1,9 +1,8 @@
 <?php
 
-namespace Tests\Unit;
+namespace Feature;
 
-use App\Enums\CategoryType;
-use App\Jobs\GenerateArticle;
+use App\Jobs\GenerateArticleWithAI;
 use App\Models\Article;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use OpenAI\Laravel\Facades\OpenAI;
@@ -38,7 +37,7 @@ class GenerateArticleTest extends TestCase
         ]);
 
         // Dispatch the job
-        GenerateArticle::dispatch();
+        GenerateArticleWithAI::dispatch();
 
         // Assert that an article was created
         $this->assertDatabaseHas('articles', [

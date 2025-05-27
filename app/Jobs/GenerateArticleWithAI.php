@@ -12,24 +12,12 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 use OpenAI\Laravel\Facades\OpenAI;
 
-class GenerateArticle implements ShouldQueue
+class GenerateArticleWithAI implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Execute the job.
-     */
     public function handle(): void
     {
-
         $response = OpenAI::chat()->create([
             'model' => 'gpt-3.5-turbo',
             'messages' => [
@@ -46,9 +34,11 @@ class GenerateArticle implements ShouldQueue
         ]);
 
         $article = json_decode($response->choices[0]->message->content, true);
+
         if (!isset($article['title'])) {
             throw new \Exception('Failed to generate article title. ' . json_encode($response->choices));
         }
+
         Article::create([
             'title' => $article['title'],
             'slug' => Str::slug($article['title']),

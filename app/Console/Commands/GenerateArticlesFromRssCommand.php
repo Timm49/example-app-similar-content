@@ -15,43 +15,50 @@ class GenerateArticlesFromRssCommand extends Command
 
     public function handle(): int
     {
-        $url = 'https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml';
+        $feedCategories = [
+            'Arts', 'ArtandDesign', 'Dance', 'Music', 'Movies','Television', 'Theater'
+        ];
 
-        $response = Http::get($url);
+        foreach ($feedCategories as $feedCategory) {
+            $url = 'https://rss.nytimes.com/services/xml/rss/nyt/'.$feedCategory.'.xml';
 
-        if (! $response->ok()) {
-            $this->error("Failed to fetch RSS feed.");
-            return Command::FAILURE;
-        }
+            $response = Http::get($url);
 
-        $xml = new SimpleXMLElement($response->body());
-
-        foreach ($xml->channel->item as $item) {
-            $title = (string) $item->title;
-            $description = (string) $item->description;
-            $author = (string) $item->children('dc', true)->creator;
-            $categories = collect($item->xpath('category'))->map(fn($c) => (string) $c)->values()->toArray();
-
-            if (empty($categories)) {
-                $this->line("Skipped no categories: $title");
-                continue;
+            if (! $response->ok()) {
+                $this->error("Failed to fetch RSS feed.");
+                return Command::FAILURE;
             }
 
-            if (Article::where('title', $title)->exists()) {
-                $this->line("Skipped duplicate: $title");
-                continue;
+            $xml = new SimpleXMLElement($response->body());
+
+            foreach ($xml->channel->item as $item) {
+                $title = (string) $item->title;
+                $description = (string) $item->description;
+                $author = (string) $item->children('dc', true)->creator;
+                $categories = collect($item->xpath('category'))->map(fn($c) => (string) $c)->values()->toArray();
+
+                if (empty($categories)) {
+                    $this->line("Skipped no categories: $title");
+                    continue;
+                }
+
+                if (Article::where('title', $title)->exists()) {
+                    $this->line("Skipped duplicate: $title");
+                    continue;
+                }
+
+                Article::create([
+                    'title' => $title,
+                    'slug' => Str::slug($title),
+                    'content' => $description,
+                    'author' => $author,
+                    'category' => $categories[0] ?? null,
+                    'keywords' => array_slice($categories, 1),
+                ]);
+
+                $this->info("Imported: $title");
             }
 
-            Article::create([
-                'title' => $title,
-                'slug' => Str::slug($title),
-                'content' => $description,
-                'author' => $author,
-                'category' => $categories[0] ?? null,
-                'keywords' => array_slice($categories, 1),
-            ]);
-
-            $this->info("Imported: $title");
         }
 
         return Command::SUCCESS;

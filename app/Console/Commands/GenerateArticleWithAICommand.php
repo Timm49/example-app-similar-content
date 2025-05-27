@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\GenerateArticle;
+use App\Jobs\GenerateArticleWithAI;
 use Illuminate\Console\Command;
 
-class GenerateArticleCommand extends Command
+class GenerateArticleWithAICommand extends Command
 {
     protected $signature = 'article:generate';
     protected $description = 'Generate a new article using OpenAI';
@@ -13,7 +13,7 @@ class GenerateArticleCommand extends Command
     public function handle()
     {
         $this->info('Dispatching article generation job...');
-        GenerateArticle::dispatch();
+        GenerateArticleWithAI::dispatch();
         $this->info('Job dispatched successfully!');
     }
 }
