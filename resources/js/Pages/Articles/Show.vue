@@ -44,11 +44,13 @@
                         <!-- Similar content -->
                         <div class="mt-12 pt-6 border-t border-gray-200">
                             <h3 class="text-sm font-medium text-gray-900 mb-2">Related articles:</h3>
+                            <Link v-for="similarContent in similar_content" :key="similarContent"
+                                  :href="`/articles/${similarContent.slug}`"
+                                  class="my-4 p-4 text-md text-lg bg-gray-100 text-gray-800 relative block">
 
-                            <div v-for="similarContent in similar_content" :key="similarContent"
-                                 class="my-4 p-4 text-md text-lg bg-gray-100 text-gray-800 relative">
-                                <div>
+                                <div class="text-xl">
                                     {{ similarContent.title }}
+                                </div>
                                 <div class="text-sm my-2">
                                     {{ similarContent.content }}
                                 </div>
@@ -59,18 +61,17 @@
                                     <strong>Keywords:</strong> {{ similarContent.keywords }}
                                 </div>
                                 <div class="absolute -top-3 -right-3">
-                                        <span
-                                            class=" inline-flex bg-amber-600 text-white items-center p-1 font-bold rounded-full aspect-square"
-                                            :class="{
-                                                'bg-red-600': similarContent.similarity_score < 0.5,
-                                                'bg-orange-500': similarContent.similarity_score >= 0.5 && similarContent.similarity_score < 0.7,
-                                                'bg-green-600': similarContent.similarity_score >= 0.7
-                                            }">
-                                            {{ similarContent.similarity_score.toFixed(2) }}
-                                        </span>
+                                    <span
+                                        class=" inline-flex bg-amber-600 text-white items-center p-1 font-bold rounded-full aspect-square"
+                                        :class="{
+                                            'bg-red-600': similarContent.similarity_score < 0.5,
+                                            'bg-orange-500': similarContent.similarity_score >= 0.5 && similarContent.similarity_score < 0.7,
+                                            'bg-green-600': similarContent.similarity_score >= 0.7
+                                        }">
+                                        {{ similarContent.similarity_score.toFixed(2) }}
+                                    </span>
                                 </div>
-                                </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

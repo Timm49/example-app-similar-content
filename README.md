@@ -39,11 +39,18 @@ php queue:listen
 Serve the app
 ```bash
 php artisan serve
+npm run dev
 ```
 
-## Examples
+## Result
+<p>
+  <img src="docs/news-index.png" alt="Screenshot of similar content results" width="500" />
+</p>
+<p>
+  <img src="docs/news-show.png" alt="Screenshot of similar content results" width="500" />
+</p>
 
-Here's an example of the ArticleController.
+## Code examples
 On the articles.show route we retrieve similar content and add it to the response:
 
 ```php
