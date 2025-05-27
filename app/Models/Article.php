@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Timm49\LaravelSimilarContent\Attributes\HasEmbeddings;
+use Timm49\LaravelSimilarContent\Traits\HasSimilarContent;
 
 #[HasEmbeddings]
 class Article extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasSimilarContent;
 
     /**
      * The attributes that are mass assignable.
@@ -39,22 +40,6 @@ class Article extends Model
         'published_at' => 'datetime',
         'keywords' => 'array',
     ];
-
-    /**
-     * Get the user that owns the article.
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the category that owns the article.
-     */
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
 
     /**
      * Get the route key for the model.
