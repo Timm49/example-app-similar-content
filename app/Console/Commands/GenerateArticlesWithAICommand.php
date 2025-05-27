@@ -12,7 +12,7 @@ class GenerateArticlesWithAICommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:generate-articles';
+    protected $signature = 'app:generate-articles-ai';
 
     /**
      * The console command description.

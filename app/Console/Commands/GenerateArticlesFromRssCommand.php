@@ -10,13 +10,34 @@ use App\Models\Article;
 
 class GenerateArticlesFromRssCommand extends Command
 {
-    protected $signature = 'rss:import-nyt-world';
+    protected $signature = 'rss:generate-articles-rss';
     protected $description = 'Import articles from the New York Times World RSS feed';
 
     public function handle(): int
     {
         $feedCategories = [
-            'Arts', 'ArtandDesign', 'Dance', 'Music', 'Movies','Television', 'Theater'
+//            'World',
+//            'Americas',
+//            'Europe',
+//            'MiddleEast',
+            'Education',
+            'Politics',
+            'Business',
+            'Technology',
+//            'Arts',
+//            'ArtandDesign',
+//            'Dance',
+//            'Music',
+//            'Movies',
+//            'Television',
+//            'Theater',
+//            'SmallBusiness',
+//            'EnergyEnvironment',
+//            'Economy',
+//            'Sports',
+//            'Baseball',
+//            'CollegeBasketball',
+//            'CollegeFootball',
         ];
 
         foreach ($feedCategories as $feedCategory) {

@@ -12,9 +12,7 @@ class ArticleController extends Controller
     public function index()
     {
         return Inertia::render('Welcome', [
-            'articles' => Article::latest()
-                ->take(40)
-                ->get()
+            'articles' => Article::latest()->get()
         ]);
     }
 

@@ -5959,7 +5959,7 @@
             "dist": {
                 "type": "path",
                 "url": "../similar-content",
-                "reference": "becc2346e09822b4ba897342315065c32368c335"
+                "reference": "d3ee953788463417e0d01b0f9689a2ec5089cbc0"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.9",
@@ -8525,6 +8525,6 @@
         "php": "^8.2",
         "ext-simplexml": "*"
     },
-    "platform-dev": {},
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
