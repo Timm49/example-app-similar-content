@@ -41,5 +41,34 @@ Serve the app
 php artisan serve
 ```
 
+## Examples
+
+Here's an example of the ArticleController.
+On the articles.show route we retrieve similar content and add it to the response:
+
+```php
+public function show(Article $article): Response
+{
+    $similarContent = collect(SimilarContent::for($article)
+        ->getSimilarContent())
+        ->take(5);
+
+    return Inertia::render('Articles/Show', [
+        'article' => $article,
+        'similar_content' => $similarContent->map(function (SimilarContentResult $item) {
+            $similarItem = Article::find($item->targetId);
+            return [
+                'title' => $similarItem->title,
+                'slug' => $similarItem->slug,
+                'author' => $similarItem->author,
+                'published_at' => $similarItem->published_at,
+                'category' => $similarItem->category,
+                'similarity_score' => $item->similarityScore,
+            ];
+        })
+    ]);
+}
+```
+
 ## Contributing
 This is just an example app so I don't expect too many contributions. Feel free of course.
