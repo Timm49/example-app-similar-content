@@ -13,7 +13,7 @@
         "laravel/tinker": "^2.10.1",
         "openai-php/client": "^0.13.0",
         "openai-php/laravel": "^0.13.0",
-        "timm49/similar-content-laravel": "@dev"
+        "timm49/similar-content-laravel": "dev-main"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

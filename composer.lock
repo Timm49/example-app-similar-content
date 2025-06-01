@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e69013106a835c22a594775ccbbbd75",
+    "content-hash": "02f9083219a0103f5bd4f486c21f4c02",
     "packages": [
         {
             "name": "brick/math",
@@ -5961,11 +5961,11 @@
         },
         {
             "name": "timm49/similar-content-laravel",
-            "version": "dev-refactor",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "../similar-content",
-                "reference": "45a342e950890f88e9c11b00d51ccf30f50af38d"
+                "reference": "b1f27a64f9ea8be482581d4603f33aedb97a5685"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.9",
@@ -5999,7 +5999,19 @@
             "license": [
                 "MIT"
             ],
-            "description": "A Laravel package for finding similar content",
+            "description": "A Laravel package for generating and comparing content embeddings to find similar models using AI",
+            "keywords": [
+                "ai",
+                "content similarity",
+                "embeddings",
+                "laravel",
+                "openai",
+                "php",
+                "recommendation",
+                "semantic search",
+                "similar content",
+                "vector search"
+            ],
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -8522,9 +8534,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "timm49/similar-content-laravel": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
