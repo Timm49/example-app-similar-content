@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Inertia\Inertia;
 use Inertia\Response;
-use Timm49\SimilarContentLaravel\SimilarContent;
 use Timm49\SimilarContentLaravel\SimilarContentResult;
 
 class ArticleController extends Controller
@@ -19,9 +18,7 @@ class ArticleController extends Controller
 
     public function show(Article $article): Response
     {
-        $similarContent = collect(SimilarContent::for($article)
-            ->getSimilarContent())
-            ->take(5);
+        $similarContent = collect(\Timm49\SimilarContentLaravel\Facades\SimilarContent::getSimilarContent($article))->take(5);
 
         return Inertia::render('Articles/Show', [
             'article' => $article,
@@ -34,7 +31,7 @@ class ArticleController extends Controller
                     'published_at' => $similarItem->published_at,
                     'category' => $similarItem->category,
                     'similarity_score' => $item->similarityScore,
-                    'content' => $similarItem   ->content,
+                    'content' => $similarItem->content,
                     'keywords' => implode(",", $similarItem->keywords),
                 ];
             })
