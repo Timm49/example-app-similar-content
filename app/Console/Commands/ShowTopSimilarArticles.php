@@ -14,8 +14,9 @@ class ShowTopSimilarArticles extends Command
 
     public function handle(): int
     {
+        $model = Article::class;
         $embeddingItems = DB::table('embeddings')
-            ->where('embeddable_type', Article::class)
+            ->where('embeddable_type', $model)
             ->get();
 
         $results = [];
@@ -43,7 +44,10 @@ class ShowTopSimilarArticles extends Command
         $topResults = array_slice($results, 0, 10);
 
         foreach ($topResults as $match) {
+            $itemA = $model::find($match['a_id']);
+            $itemB = $model::find($match['b_id']);
             $this->line("{$match['a_id']} <-> {$match['b_id']} = {$match['score']}");
+            $this->line("{$itemA->name} <-> {$itemB->name} = {$match['score']}");
         }
 
         return Command::SUCCESS;

@@ -3,27 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Inertia\Inertia;
 use Inertia\Response;
+use Timm49\SimilarContentLaravel\Facades\SimilarContent;
 use Timm49\SimilarContentLaravel\SimilarContentResult;
 
 class ArticleController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
         return Inertia::render('Welcome', [
-            'articles' => Article::latest()->get()
+            'articles' => Article::latest()->get(),
+            'searchResults' => $this->getSearchResults($request)
         ]);
     }
 
     public function show(Article $article): Response
     {
-        $similarContent = collect(\Timm49\SimilarContentLaravel\Facades\SimilarContent::getSimilarContent($article))->take(5);
-
         return Inertia::render('Articles/Show', [
             'article' => $article,
-            'similar_content' => $similarContent->map(function (SimilarContentResult $item) {
+            'similar_content' => $this->getSimilarContent($article)
+        ]);
+    }
+
+    private function getSimilarContent($article)
+    {
+        $similarContent = collect(SimilarContent::getSimilarContent($article))->take(5);
+
+        return $similarContent->map(function (SimilarContentResult $item) {
                 $similarItem = Article::find($item->targetId);
+                $keywords = $similarItem->keywords ?: [];
                 return [
                     'title' => $similarItem->title,
                     'slug' => $similarItem->slug,
@@ -32,9 +43,22 @@ class ArticleController extends Controller
                     'category' => $similarItem->category,
                     'similarity_score' => $item->similarityScore,
                     'content' => $similarItem->content,
-                    'keywords' => implode(",", $similarItem->keywords),
+                    'keywords' => implode(",", $keywords),
                 ];
-            })
-        ]);
+            });
+    }
+
+    private function getSearchResults(Request $request): Collection
+    {
+        $searchResults = $request->has('q') ? SimilarContent::search($request->get('q')) : [];
+
+        $searchResults = collect($searchResults)->map(function (SimilarContentResult $result) {
+            $article = Article::find($result->targetId);
+            return $article ? array_merge($article->toArray(), [
+                'similarityScore' => $result->similarityScore
+            ]) : [];
+        });
+
+        return $searchResults;
     }
 }

@@ -4,6 +4,13 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
+                        <input type="text" v-model="searchQuery" placeholder="Search..." class="border rounded p-2 mb-4 w-full" @keyup.enter="search" />
+                    </div>
+                    <div v-if="searchResults.length > 0">
+                        <h1 class="text-4xl font-bold text-center mb-8">Search Results</h1>
+                        <pre>{{ searchResults }}</pre>
+                    </div>
+                    <div class="p-6 text-gray-900">
                         <h1 class="text-4xl font-bold text-center mb-8">Latest News</h1>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -31,12 +38,25 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import {Link} from '@inertiajs/vue3';
+import { ref } from 'vue';
+
+const searchQuery = ref('');
+
+function search() {
+    if (searchQuery.value) {
+        window.location.href = `?q=${searchQuery.value}`;
+    }
+}
 
 defineProps({
     articles: {
         type: Array,
         required: true
+    },
+    searchResults: {
+        type: Array,
+        required: false
     }
 });
 </script>
