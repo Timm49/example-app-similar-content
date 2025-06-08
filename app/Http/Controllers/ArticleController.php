@@ -14,7 +14,7 @@ class ArticleController extends Controller
 {
     public function index(Request $request): Response
     {
-        return Inertia::render('Welcome', [
+        return Inertia::render('Articles/Index', [
             'articles' => Article::latest()->get(),
             'searchResults' => $this->getSearchResults($request)
         ]);
@@ -35,6 +35,7 @@ class ArticleController extends Controller
         return $similarContent->map(function (SimilarContentResult $item) {
                 $similarItem = Article::find($item->targetId);
                 $keywords = $similarItem->keywords ?: [];
+
                 return [
                     'title' => $similarItem->title,
                     'slug' => $similarItem->slug,
@@ -55,7 +56,7 @@ class ArticleController extends Controller
         $searchResults = collect($searchResults)->map(function (SimilarContentResult $result) {
             $article = Article::find($result->targetId);
             return $article ? array_merge($article->toArray(), [
-                'similarityScore' => $result->similarityScore
+                'similarity_score' => $result->similarityScore
             ]) : [];
         });
 
