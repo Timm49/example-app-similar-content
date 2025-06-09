@@ -5952,12 +5952,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Timm49/similar-content-laravel.git",
-                "reference": "a52fe8ac447d0f8542d2a0744bec5f6314e4136c"
+                "reference": "13357c38cc791a8c3cd01a6aacc54c51a8319269"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Timm49/similar-content-laravel/zipball/a52fe8ac447d0f8542d2a0744bec5f6314e4136c",
-                "reference": "a52fe8ac447d0f8542d2a0744bec5f6314e4136c",
+                "url": "https://api.github.com/repos/Timm49/similar-content-laravel/zipball/13357c38cc791a8c3cd01a6aacc54c51a8319269",
+                "reference": "13357c38cc791a8c3cd01a6aacc54c51a8319269",
                 "shasum": ""
             },
             "require": {
@@ -6004,9 +6004,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Timm49/similar-content-laravel/issues",
-                "source": "https://github.com/Timm49/similar-content-laravel/tree/0.0.1"
+                "source": "https://github.com/Timm49/similar-content-laravel/tree/0.0.2"
             },
-            "time": "2025-06-09T12:31:13+00:00"
+            "time": "2025-06-09T20:30:56+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
