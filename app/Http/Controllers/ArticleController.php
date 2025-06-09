@@ -8,7 +8,8 @@ use Illuminate\Support\Collection;
 use Inertia\Inertia;
 use Inertia\Response;
 use Timm49\SimilarContentLaravel\Facades\SimilarContent;
-use Timm49\SimilarContentLaravel\SimilarContentResult;
+use Timm49\SimilarContentLaravel\Results\SearchResult;
+use Timm49\SimilarContentLaravel\Results\SimilarContentResult;
 
 class ArticleController extends Controller
 {
@@ -53,13 +54,11 @@ class ArticleController extends Controller
     {
         $searchResults = $request->has('q') ? SimilarContent::search($request->get('q')) : [];
 
-        $searchResults = collect($searchResults)->map(function (SimilarContentResult $result) {
-            $article = Article::find($result->targetId);
+        return collect($searchResults)->map(function (SearchResult $result) {
+            $article = Article::find($result->id);
             return $article ? array_merge($article->toArray(), [
                 'similarity_score' => $result->similarityScore
             ]) : [];
         });
-
-        return $searchResults;
     }
 }
